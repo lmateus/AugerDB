@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso de informacion</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/7fd20a6e02.js" crossorigin="anonymous"></script>
+    <!-- Informacion del excel-->
+    <script src="https://bossanova.uk/jspreadsheet/v3/jexcel.js"></script>
+    <link rel="stylesheet" href="https://bossanova.uk/jspreadsheet/v3/jexcel.css" type="text/css" />
+    <script src="https://jsuites.net/v3/jsuites.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v3/jsuites.css" type="text/css" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Auger</h2>
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="#"><i class="fas fa-users"></i>Usuarios</a></li>
+                <li><a href="#"><i class="fas fa-building"></i>Estructuras</a></li>
+                <li><a href="#"><i class="fas fa-thumbtack"></i>Sondeos</a></li>
+                <li><a href="#"><i class="fas fa-draw-polygon"></i>Perfiles</a></li>
+            </ul>
+        </div>
+
+        <!-- Agregamos una tabla con la informacion de las muestras -->
+        <div class="main_content">
+            
+
+            <div class="header">
+               Hola Leonardo!
+            </div>
+
+            <div id="spreadsheet"></div>
+
+
+        </div>
+    </div>
+
+     <!-- The core Firebase JS SDK is always required and must be listed first -->
+     <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+
+     <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+     <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-auth.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-firestore.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-database.js"></script>
+ 
+ 
+     <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-analytics.js"></script>
+ 
+     <script>
+         // Your web app's Firebase configuration
+         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+         const firebaseConfig = {
+             apiKey: "AIzaSyDORUIzuWx1XM9phIQkHF9wbfWD04botaI",
+             authDomain: "db-silica.firebaseapp.com",
+             databaseURL: "https://db-silica-default-rtdb.firebaseio.com",
+             projectId: "db-silica",
+             storageBucket: "db-silica.appspot.com",
+             messagingSenderId: "866616915344",
+             appId: "1:866616915344:web:2bb7de59c8521813736f15"
+         };
+         // Initialize Firebase
+         firebase.initializeApp(firebaseConfig);
+         const auth = firebase.auth()
+         const db = firebase.firestore()
+         const dbRt = firebase.database() // Database in real-time
+
+         // BORRAR ESTO! ES INFORMACION DE PRUEBA
+
+        // EXTRAEMOS INFORMACION DE LA BASE DE DATOS DE UN SONDEOS CUALQUIERA
+        var starCountRef = dbRt.ref('PROYECTOS/PUBLIC/2280496994730/13021914686124');
+
+         
+
+        starCountRef.on('value', (snapshot) => {
+            const data = snapshot.val();
+            console.log(data)
+
+        var sortData = [];
+        for (var sample in data['layers']) {
+                sortData.push([ data['layers'][sample]['TRAMO_DESDE(m)']['VALUE'],
+                                data['layers'][sample]['TRAMO_HASTA(m)']['VALUE'],
+                                data['layers'][sample]['No_CAPA']['VALUE'],
+                                '',
+                                data['layers'][sample]["DESCRIPCIoN "],
+                                '',
+                                '',
+                                '',
+                                '',
+                                ''                            
+                            ]);
+        
+        };
+        sortData.sort();
+        console.log(sortData);
+        //var data = sortData;
+                
+                jexcel(document.getElementById('spreadsheet'), {
+                    data:sortData,
+                    columns: [
+                        {
+                            type: 'numeric',
+                            title:'Inicial',
+                            width:50,
+                            decimal:','
+                        },
+                        {
+                            type: 'numeric',
+                            title:'Final',
+                            width:50,
+                            decimal:','
+                        },
+                        {
+                            type: 'numeric',
+                            title:'Muestra',
+                            width:80
+                        },
+                        {
+                            type: 'text',
+                            title:'Tipo',
+                            width:40
+                        },
+                        {
+                            type: 'text',
+                            title:'Descripcion',
+                            width:500
+                        },
+                        {
+                            type: 'text',
+                            title:'SPT',
+                            width:40
+                        },
+                        {
+                            type: 'text',
+                            title:'RPI',
+                            width:40
+                        },
+                        {
+                            type: 'text',
+                            title:'RQD',
+                            width:40
+                        },
+                        {
+                            type: 'text',
+                            title:'Recobro',
+                            width:70
+                        },
+                        {
+                            type: 'text',
+                            title:'Nivel freático',
+                            width:100
+                        },
+                        {
+                            type: 'image',
+                            title:'Photo',
+                            width:120
+                        }
+                     ],
+
+                    nestedHeaders:[
+                        [
+                            {
+                                title: 'Profundidad',
+                                colspan: '2',
+                            },
+                            {
+                                title: 'Información general',
+                                colspan: '9',
+                            },
+                        ]
+
+                    ],                        
+                });
+
+
+        });
+
+        
+        
+                
+
+
+
+         
+ 
+     // firebase.analytics();
+     </script>
+ 
+
+
+</body>
+</html>
