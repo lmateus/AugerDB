@@ -1,5 +1,5 @@
 // EXTRAEMOS INFORMACION DE LA BASE DE DATOS DE UN SONDEO CUALQUIERA
-var starCountRef = dbRt.ref('PROYECTOS/PUBLIC/2280496994730/11724359005320')
+var starCountRef = dbRt.ref('PROYECTOS/PUBLIC/2280496994730/12981279098428')
 
 starCountRef.on('value', snapshot => {
   const data = snapshot.val()
