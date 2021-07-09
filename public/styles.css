@@ -25,6 +25,7 @@ body{
   height: 100%;
   background: #4b4276;
   padding: 30px 0;
+  
 }
 
 .wrapper .sidebar h2{
@@ -56,6 +57,20 @@ body{
 .wrapper .sidebar ul li:hover a{
   color: #fff;
 }
+
+.wrapper .sidebar ul li ul {
+  border-top: 1px solid #ccc;
+  height: 300px;
+  display: none;
+  min-width: 140px;
+  overflow: scroll;
+}
+
+.wrapper .sidebar ul li:hover > ul {
+  display: block;
+}
+
+
 
 .wrapper .main_content{
   width: 100%;
