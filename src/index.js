@@ -1,4 +1,6 @@
 import './styles/main.css';
+import {router} from './routes/index.routes'
 
-
-console.log('Hello world')
+window.addEventListener('hashchange',()=>{
+    router(window.location.hash)
+})

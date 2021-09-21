@@ -25,7 +25,11 @@ module.exports = {
             use: [MiniCssExtractPlugin.loader,
             'css-loader'
         ],
-        }
+        },
+        {
+            test: /\.html$/i,
+            loader:'html-loader'
+        },
     ]
     },
     plugins:[
