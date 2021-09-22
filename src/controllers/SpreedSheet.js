@@ -1,5 +1,9 @@
 // EXTRAEMOS INFORMACION DE LA BASE DE DATOS DE UN SONDEO CUALQUIERA
-var starCountRef = dbRt.ref('PROYECTOS/471808842170/5467190946839/38360578691279')
+
+export default async () => {
+
+  console.log('lo estoy haciendo')
+var starCountRef = await dbRt.ref('PROYECTOS/471808842170/5467190946839/38360578691279')
 
 starCountRef.on('value', snapshot => {
   const data = snapshot.val()
@@ -50,3 +54,4 @@ starCountRef.on('value', snapshot => {
     ]
   })
 })
+};

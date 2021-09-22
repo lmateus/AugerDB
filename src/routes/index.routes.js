@@ -11,9 +11,9 @@ const router = (route) =>{
         case '#/users':
             return(console.log('users'))
         case '#/structurs':
-            return(console.log('structures'))
+            return(pages.structure())
         case '#/sondeo':
-            return(console.log('sondeo'))
+            return(pages.sondeo())
         case '#/profiles':
              return(console.log('profiles'))
         default:{
