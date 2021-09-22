@@ -1,7 +1,7 @@
 // EXTRAEMOS INFORMACION DE LA BASE DE DATOS DE UN SONDEO CUALQUIERA
 
 export default async (sondeo) => {
-  document.getElementById('spreadsheet').innerHTML = ''
+  document.getElementById('root').innerHTML = ''
 
   var starCountRef = await dbRt.ref('PROYECTOS/PUBLIC/2280496994730/' + sondeo)
 
@@ -24,7 +24,7 @@ export default async (sondeo) => {
     }
     sortData.sort()
 
-    jexcel(document.getElementById('spreadsheet'), {
+    jexcel(document.getElementById('root'), {
       data: sortData,
       columns: [
         { type: 'numeric', title: 'Inicial', width: 50, decimal: ',' },

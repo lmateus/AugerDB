@@ -1,7 +1,6 @@
 import Sheet from './SpreedSheet'
 
-var path = window.location.hash
-console.log(path.split('/'))
+
 
 // Listamos las perforaciones de un proyecto
 var sondeolist = document.getElementById('sondeolist')

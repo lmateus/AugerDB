@@ -12,11 +12,11 @@ window.addEventListener('hashchange', () => {
     var sondeoSplit = path.split('/');
     
     if (sondeoSplit[1] != 'sondeo'){
-        console.log('no')
+        //console.log()
     } else{
-        console.log(sondeoSplit.length)
+        //console.log(sondeoSplit.length)
         if (sondeoSplit.length < 3){
-            console.log('no2')
+            //console.log()
         } else{
             var sondeo = sondeoSplit[2]
             Sheet(sondeo);
