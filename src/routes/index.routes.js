@@ -4,6 +4,7 @@ let content = document.getElementById('root')
 
 const router = route => {
   content.innerHTML = ''
+ 
   switch (route) {
     case '#/home': {
       return content.appendChild(pages.home())
@@ -15,7 +16,7 @@ const router = route => {
     case '#/sondeo':
       return pages.sondeo()
     case '#/profiles':
-      return content.appendChild(pages.profile())
+      return pages.profile()
     default: {
       return content.appendChild(pages.notFound())
     }

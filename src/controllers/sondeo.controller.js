@@ -1,7 +1,5 @@
 import Sheet from './SpreedSheet'
 
-
-
 // Listamos las perforaciones de un proyecto
 var sondeolist = document.getElementById('sondeolist')
 
