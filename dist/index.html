@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingreso de informacion</title>
@@ -13,6 +13,8 @@
     <script src="https://jsuites.net/v3/jsuites.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v3/jsuites.css" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- BOOTSTRAP CDN-->
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
 
 <script defer src="main.js"></script><link href="main.css" rel="stylesheet"></head>
 
@@ -36,17 +38,25 @@
             </ul>
         </div>
 
-        <!-- Agregamos una tabla con la informacion de las muestras -->
+        
         <div class="main_content">
-            <div class="header">
-                Hola Leonardo!
-            </div>
-            <section id="root"></section>
-
-            <div>
-                <canvas id="lineChart" ></canvas>
-            </div>
             
+            <!-- En id root queda toda la visualizacion principal -->
+            <div id="root" class='root'>
+
+                
+            </div>
+
+            <div id="editing" class="col-md-4">
+                    <form id="sondeo-form" class="btn-group-vertical">
+                        <input type="submit" value="Crear sondeo" class="btn btn-primary">
+                        <input type="submit" value="Guardar sondeo" class="btn btn-success">
+                    </form>                
+            </div>
+               
+            
+
+
         </div>
     </div>
 

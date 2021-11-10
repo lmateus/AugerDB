@@ -73,14 +73,18 @@ body{
 
 
 .wrapper .main_content{
+  margin-top: 40px;
   width: 100%;
   margin-left: 220px;
-  color:black
+  color:black;
+  display: grid;
+  grid-template-columns:80% 20%;
 }
 
-.wrapper .main_content .header{
+.wrapper .main_content .header .h1{
   padding: 20px;
   background: #fff;
   color: #717171;
   border-bottom: 1px solid #e0e4e8;
 }
+

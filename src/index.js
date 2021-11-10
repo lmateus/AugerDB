@@ -1,11 +1,11 @@
 import './styles/main.css'
+import './styles/root.css'
 import { router } from './routes/index.routes'
-import Sheet from './controllers/SpreedSheet'
+import Sheet from './controllers/excel/SpreedSheet'
 
 window.addEventListener('hashchange', () => {
   router(window.location.hash)
 })
-
 
 window.addEventListener('hashchange', () => {
     var path = window.location.hash;

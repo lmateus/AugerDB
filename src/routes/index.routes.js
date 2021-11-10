@@ -3,8 +3,9 @@ import { pages } from '../controllers/index'
 let content = document.getElementById('root')
 
 const router = route => {
-  content.innerHTML = ''
- 
+  console.log(route)
+  content.innerHTML = '';
+
   switch (route) {
     case '#/home': {
       return content.appendChild(pages.home())
@@ -16,7 +17,7 @@ const router = route => {
     case '#/sondeo':
       return pages.sondeo()
     case '#/profiles':
-      return pages.profile()
+      return content.appendChild(pages.profile())
     default: {
       return content.appendChild(pages.notFound())
     }

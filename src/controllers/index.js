@@ -1,8 +1,8 @@
-import Home from './home.controller'
-import Sondeo from './sondeo.controller'
-import notFound from './404.controller'
-import Structure from './structure.controller'
-import Profile from './profile'
+import Home from '../controllers/sidebar/home.controller'
+import Sondeo from '../controllers/excel/sondeo.controller'
+import notFound from '../controllers/sidebar/404.controller'
+import Structure from '../controllers/sidebar/structure.controller'
+import Profile from '../controllers/sidebar/profile'
 
 const pages = {
     home: Home,
