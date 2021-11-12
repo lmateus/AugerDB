@@ -5,7 +5,7 @@ var sondeolist = document.getElementById('sondeolist')
 
 export default async () => {
   sondeolist.innerHTML = ''
-  var starCountRef = await dbRt.ref('PROYECTOS/PUBLIC/2280496994730')
+  var starCountRef = await dbRt.ref('PROYECTOS/HSDJH343467/12089904614874')
   starCountRef.on('value', snapshot => {
     const data = snapshot.val()
     var sondeos = Object.keys(data)

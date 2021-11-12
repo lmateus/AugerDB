@@ -5,7 +5,7 @@ export default async () => {
     
     structureList.innerHTML = '';
 
-    var starCountRef = await dbRt.ref('PROYECTOS/PUBLIC/');
+    var starCountRef = await dbRt.ref('PROYECTOS/HSDJH343467/');
     starCountRef.on('value', snapshot => {
         const data = snapshot.val()
         

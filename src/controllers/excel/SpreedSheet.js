@@ -1,19 +1,20 @@
 // EXTRAEMOS INFORMACION DE LA BASE DE DATOS DE UN SONDEO CUALQUIERA
 import configSheet from "./configSheet"
-const HtmlTableToJson = require('html-table-to-json');
 
 export default async (sondeo) => {
   document.getElementById('root').innerHTML = ''
 
-  var starCountRef = await dbRt.ref('PROYECTOS/PUBLIC/2280496994730/' + sondeo)
+  var starCountRef = await dbRt.ref('PROYECTOS/HSDJH343467/12089904614874/' + sondeo)
 
   starCountRef.on('value', snapshot => {
     const data = snapshot.val()
+
     var sortData = []
     var layers = data['layers']
 
     for (var sample in layers) {
       sortData.push([
+        '',
         data['layers'][sample]['TRAMO_DESDE(m)']['VALUE'],
         data['layers'][sample]['TRAMO_HASTA(m)']['VALUE'],
         data['layers'][sample]['No_CAPA']['VALUE'],
@@ -22,17 +23,13 @@ export default async (sondeo) => {
         '',
         '',
         '',
-        '',
         ''
       ])
     }
-    sortData.sort()
-    configSheet(sortData);
+    //console.log(sortData.sort());
+    configSheet(sortData.sort());
   });
-  const table = document.getElementById('root')
-  const jsonTables = HtmlTableToJson.parse(table.outerHTML);
- 
-  console.log(jsonTables.results);
+
 }
 
 
