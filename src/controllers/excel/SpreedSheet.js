@@ -15,9 +15,9 @@ export default async (sondeo) => {
     for (var sample in layers) {
       sortData.push([
         '',
-        data['layers'][sample]['TRAMO_DESDE(m)']['VALUE'],
-        data['layers'][sample]['TRAMO_HASTA(m)']['VALUE'],
-        data['layers'][sample]['No_CAPA']['VALUE'],
+        parseFloat(data['layers'][sample]['TRAMO_DESDE(m)']['VALUE']),
+        parseFloat(data['layers'][sample]['TRAMO_HASTA(m)']['VALUE']),
+        parseFloat(data['layers'][sample]['No_CAPA']['VALUE']),
         '',
         data['layers'][sample]['DESCRIPCIoN '],
         '',
@@ -25,9 +25,9 @@ export default async (sondeo) => {
         '',
         ''
       ])
-    }
+    };
     //console.log(sortData.sort());
-    configSheet(sortData.sort());
+    configSheet(sortData);
   });
 
 }

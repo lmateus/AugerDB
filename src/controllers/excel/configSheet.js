@@ -6,7 +6,7 @@ export default (data) => {
         toolbar:[
           {
               type: 'color',
-              content: 'Material',
+              content: 'format_color_fill',
               k: 'background-color'
           },
       ],
