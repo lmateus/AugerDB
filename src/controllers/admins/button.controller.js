@@ -37,34 +37,36 @@ export default () => {
   };
   
   const muestrasArray = Object.keys(MUESTRAS)
+  // Eliminamos los colores repetidos
   let uniqueColores= Array.from(new Set(colores));
 
+  // Creamos un objeto layers cada color identificado es un estrato
   let Layers = {}
 
-  muestrasArray.forEach(element => {
+  for (let i in uniqueColores){
+    let colorEstrato = uniqueColores[i];
+    //Layers[i] = i
 
-    for (let i=0; i < uniqueColores.length; i++){
-      Layers[i] = {}
-      if (uniqueColores[i] === MUESTRAS[element].color){
-        let randomMuestra = Math.floor(Math.random() * 1000000000000)
-        Layers[i]['MUESTRAS'] = {}
-        Layers[i]['MUESTRAS'][randomMuestra] = MUESTRAS[element]
-        
-      }
-    }
+    let estrato1 = {}
+
+    for (let j in muestrasArray){
+      let colorMuestra = MUESTRAS[muestrasArray[j]]['color'];
+
+      if (colorEstrato === colorMuestra){
+        //console.log(MUESTRAS[muestrasArray[j]])  
+        console.log(i)
+        estrato1[j] = MUESTRAS[muestrasArray[j]]   
+
+      };
+      
+    };
     
-  });
+    Layers[i] = estrato1
+    
+  };
 
   console.log(Layers)
-
-  /*muestrasArray.forEach(element => {
-    for (let i=0;i<uniqueColores.length;i++){
-
-      if (uniqueColores[i] ===MUESTRAS[element].color){
-        console.log(uniqueColores[i])
-      }
-    }
-   });*/
+  
 
   
   
