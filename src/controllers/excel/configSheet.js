@@ -1,6 +1,6 @@
 export default (data) => {
 
-    jexcel(document.getElementById('root'), {
+    jexcel(document.getElementById('divContentTable'), {
         data: data,
 
         toolbar:[

@@ -93,6 +93,20 @@ body{
   border-bottom: 1px solid #e0e4e8;
 }
 
+.table-bordered{
+  margin-left: 20px;
+  width: 75%;
+  border: 1.5px solid #CCCCCC;
+  
+}
+
+.table-bordered tr td{
+  padding:0.3px;
+  border: 1.5px solid #CCCCCC;
+  width: 30px;
+  text-align: center;
+}
+
 
 /*!***********************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/styles/root.css ***!

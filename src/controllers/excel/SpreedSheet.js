@@ -1,32 +1,45 @@
 // EXTRAEMOS INFORMACION DE LA BASE DE DATOS DE UN SONDEO CUALQUIERA
 import configSheet from "./configSheet"
+import tableInfo from "./tableInfo";
 
 export default async (sondeo) => {
   document.getElementById('root').innerHTML = ''
+  
+  // Creamos la tabla encabezado
+  tableInfo();
 
+  // Creamos la tabla contenido
+  let divContentTable = document.createElement("div");
+  divContentTable.setAttribute("id", "divContentTable");
+  document.getElementById('root').appendChild(divContentTable);
+  
+  //Hacemos la peticiion a la base de datos
   var starCountRef = await dbRt.ref('PROYECTOS/HSDJH343467/12089904614874/' + sondeo)
-
   starCountRef.on('value', snapshot => {
     const data = snapshot.val()
-
+    console.log(data)
     var sortData = []
     var layers = data['layers']
-
     for (var sample in layers) {
+
+      let infoSample = data['layers'][sample]
       sortData.push([
         '',
-        parseFloat(data['layers'][sample]['TRAMO_DESDE(m)']['VALUE']),
-        parseFloat(data['layers'][sample]['TRAMO_HASTA(m)']['VALUE']),
-        parseFloat(data['layers'][sample]['No_CAPA']['VALUE']),
+        infoSample['TRAMO_DESDE(m)']['VALUE'],
+        infoSample['TRAMO_HASTA(m)']['VALUE'],
+        infoSample['No_CAPA']['VALUE'],
         '',
-        data['layers'][sample]['DESCRIPCIoN '],
+        infoSample['DESCRIPCIoN '],
         '',
         '',
         '',
         ''
       ])
     };
-    //console.log(sortData.sort());
+    //Re ordenamos la lista
+    sortData.sort(function(a,b){
+      return a[1] -b[1]
+    })
     configSheet(sortData);
   });
 

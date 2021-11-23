@@ -2,7 +2,7 @@ const HtmlTableToJson = require('html-table-to-json')
 
 export default () => {
   // Buscamos la tabla con la informacion del registro de perforacion
-  let table = document.getElementById('root')
+  let table = document.getElementById('divContentTable')
   // Herramienta para convertir tabla a JSON
   let jsonTables = HtmlTableToJson.parse(table.childNodes[1].innerHTML)
   let muestras = jsonTables.results[0]
@@ -35,7 +35,8 @@ export default () => {
     let cellColor = arrayTable[row].childNodes[1].style['background-color']
     MUESTRAS[muestraKey]['color'] = cellColor
   };
-  
+  /*Ahora necesitamos agrupar las muestras que tienen el mismo color para 
+  obtener los estratos*/
   const muestrasArray = Object.keys(MUESTRAS)
   // Eliminamos los colores repetidos
   let uniqueColores= Array.from(new Set(colores));
@@ -45,151 +46,67 @@ export default () => {
 
   for (let i in uniqueColores){
     let colorEstrato = uniqueColores[i];
-    //Layers[i] = i
-
-    let estrato1 = {}
-
+    let estrato = {}
+    let strataDepth = []
     for (let j in muestrasArray){
       let colorMuestra = MUESTRAS[muestrasArray[j]]['color'];
-
-      if (colorEstrato === colorMuestra){
-        //console.log(MUESTRAS[muestrasArray[j]])  
-        console.log(i)
-        estrato1[j] = MUESTRAS[muestrasArray[j]]   
-
+        if (colorEstrato === colorMuestra){
+        let randomMuestra = Math.floor(Math.random() * 1000000000000)
+        estrato[randomMuestra] = MUESTRAS[muestrasArray[j]]  
+        // Comparamos las profundidades iniciales y finales 
+        let sampleSup =  parseFloat(MUESTRAS[muestrasArray[j]]['Inicial']);
+        let sampleInf =  parseFloat(MUESTRAS[muestrasArray[j]]['Final']);
+        strataDepth.push(sampleSup,sampleInf)
       };
-      
-    };
+
     
-    Layers[i] = estrato1
+    };
+    let strataStart = Math.min.apply(null,strataDepth);
+    let strataEnd = Math.max.apply(null,strataDepth);
+    
+    let randomEstrato = Math.floor(Math.random() * 1000000000000)
+    Layers[randomEstrato] = estrato
+    Layers[randomEstrato]["TRAMO_DESDE(m)"] = {"UNIT":"m","VALUE":strataStart}
+    Layers[randomEstrato]["TRAMO_HASTA(m)"] = {"UNIT":"m","VALUE":strataEnd}
+    Layers[randomEstrato]["DESCRIPCIoN "] = "Arcilla limosa de color gris"
+    Layers[randomEstrato]["NOMBRE_ESTRATO"] = Math.floor(Math.random() * 1000000000000)
     
   };
 
-  console.log(Layers)
-  
-
-  
-  
-
-  /*Ahora necesitamos agrupar las muestras que tienen el mismo color para 
-  obtener los estratos*/
-
-
-
+  const idHeadTable = ["logLocation","nameLog","north","date","levelF","east","driller","typeLog"]
+  let infoLog = {}
+  idHeadTable.forEach(element => {
+    infoLog[element] = document.getElementById(element).textContent
+  });
+    
   // Creamos un objeto sondeo
   let infoSondeo = {
     ID_EXPLORACION: '1486442648676',
-    NOMBRE_EXPLORACION: 'Prueban',
+    NOMBRE_EXPLORACION: infoLog.nameLog,
     geometry: {
-      coordinates: [-74.102648, 4.613989],
+      coordinates: [infoLog.east, infoLog.north],
       type: 'Point'
     },
-    layers: {
-      '10660432334091': {
-        COOR_X: {
-          UNIT: 'u',
-          VALUE: 98679
-        },
-        COOR_Y: {
-          UNIT: 'u',
-          VALUE: 101730
-        },
-        'DESCRIPCIoN ': 'Arena limosa color gris clara',
-        ID_ESTRATO: '10660432334091',
-        ID_EXPLORACION: '1486442648676',
-        MUESTRAS: {
-          '33393313057656': {
-            COOR_X: {
-              UNIT: 'u',
-              VALUE: 98679
-            },
-            COOR_Y: {
-              UNIT: 'u',
-              VALUE: 101730
-            },
-            ID_ESTRATO: '10660432334091',
-            ID_EXPLORACION: '1486442648676',
-            ID_MUESTRA: '33393313057656',
-            NOMBRE_ESTRATO: 'PSI2P45E13',
-            NOMBRE_EXPLORACION: 'PSI2P45',
-            NOMBRE_MUESTRA: 'PSI2P45E13M7',
-            No_MUESTRA: {
-              UNIT: 'u',
-              VALUE: 7
-            },
-            PROFUNDIDAD_MEDIA: {
-              UNIT: 'u',
-              VALUE: 40.05
-            },
-            WN: {
-              UNIT: 'u',
-              VALUE: 20
-            }
-          },
-          '33393313057652': {
-            COOR_X: {
-              UNIT: 'u',
-              VALUE: 98679
-            },
-            COOR_Y: {
-              UNIT: 'u',
-              VALUE: 101730
-            },
-            ID_ESTRATO: '10660432334091',
-            ID_EXPLORACION: '1486442648676',
-            ID_MUESTRA: '33393313057656',
-            NOMBRE_ESTRATO: 'PSI2P45E13',
-            NOMBRE_EXPLORACION: 'PSI2P45',
-            NOMBRE_MUESTRA: 'PSI2P45E13M7',
-            No_MUESTRA: {
-              UNIT: 'u',
-              VALUE: 7
-            },
-            PROFUNDIDAD_MEDIA: {
-              UNIT: 'u',
-              VALUE: 10
-            },
-            WN: {
-              UNIT: 'u',
-              VALUE: 20
-            }
-          }
-        },
-        NOMBRE_ESTRATO: 'PSI2P45E13',
-        NOMBRE_EXPLORACION: 'PSI2P45',
-        No_CAPA: {
-          UNIT: 'u',
-          VALUE: 13
-        },
-        'TRAMO_DESDE(m)': {
-          UNIT: 'u',
-          VALUE: 0
-        },
-        'TRAMO_HASTA(m)': {
-          UNIT: 'u',
-          VALUE: 41.5
-        },
-        USCS: 'SP'
-      }
-    },
+    layers: Layers,
     properties: {
-      clase: 'PERFORACION MECANICA',
-      direccion: 'Cll. 68 Cra. 82',
+      clase: infoLog.typeLog,
+      direccion: infoLog.logLocation,
       fecha: {
         UNIT: 'u',
-        VALUE: 929404800000
+        VALUE: infoLog.date
       },
       nivel_freatico: {
         UNIT: 'u',
-        VALUE: 5
+        VALUE: infoLog.levelF
       },
-      nombre: 'CALLE 68 POR CARRERA 82',
-      title: 'Prueba1'
+      nombre: infoLog.nameLog,
+      title: infoLog.nameLog
     },
     type: 'Feature'
   }
 
-  //dbRt.ref('PROYECTOS/HSDJH343467/12089904614874/123456789').set(
-  //infoSondeo
-  //);
+  console.log(infoSondeo)
+
+  dbRt.ref('PROYECTOS/HSDJH343467/12089904614874/123456789').set(
+  infoSondeo);
 }
