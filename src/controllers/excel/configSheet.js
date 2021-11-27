@@ -1,5 +1,6 @@
 export default (data) => {
 
+  
     jexcel(document.getElementById('divContentTable'), {
         data: data,
 

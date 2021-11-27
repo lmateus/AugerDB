@@ -48,11 +48,13 @@ export default () => {
     let colorEstrato = uniqueColores[i];
     let estrato = {}
     let strataDepth = []
+    let muestrasEstrato = {}
     for (let j in muestrasArray){
       let colorMuestra = MUESTRAS[muestrasArray[j]]['color'];
         if (colorEstrato === colorMuestra){
         let randomMuestra = Math.floor(Math.random() * 1000000000000)
-        estrato[randomMuestra] = MUESTRAS[muestrasArray[j]]  
+        muestrasEstrato[randomMuestra] = MUESTRAS[muestrasArray[j]]
+        //estrato['MUESTRAS'][randomMuestra] = MUESTRAS[muestrasArray[j]];
         // Comparamos las profundidades iniciales y finales 
         let sampleSup =  parseFloat(MUESTRAS[muestrasArray[j]]['Inicial']);
         let sampleInf =  parseFloat(MUESTRAS[muestrasArray[j]]['Final']);
@@ -61,6 +63,7 @@ export default () => {
 
     
     };
+    estrato['MUESTRAS'] = muestrasEstrato;
     let strataStart = Math.min.apply(null,strataDepth);
     let strataEnd = Math.max.apply(null,strataDepth);
     
@@ -70,6 +73,8 @@ export default () => {
     Layers[randomEstrato]["TRAMO_HASTA(m)"] = {"UNIT":"m","VALUE":strataEnd}
     Layers[randomEstrato]["DESCRIPCIoN "] = "Arcilla limosa de color gris"
     Layers[randomEstrato]["NOMBRE_ESTRATO"] = Math.floor(Math.random() * 1000000000000)
+    Layers[randomEstrato]["USCS"] = colorEstrato
+    
     
   };
 
