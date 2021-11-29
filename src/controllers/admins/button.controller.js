@@ -77,6 +77,7 @@ export default () => {
     
     
   };
+  // Estraemos la informacion de la tabla encabezado
 
   const idHeadTable = ["logLocation","nameLog","north","date","levelF","east","driller","typeLog"]
   let infoLog = {}
@@ -85,8 +86,10 @@ export default () => {
   });
     
   // Creamos un objeto sondeo
+
+  let randomIdSondeo = Math.floor(Math.random() * 1000000000000)
   let infoSondeo = {
-    ID_EXPLORACION: '1486442648676',
+    ID_EXPLORACION: randomIdSondeo,
     NOMBRE_EXPLORACION: infoLog.nameLog,
     geometry: {
       coordinates: [infoLog.east, infoLog.north],
@@ -110,8 +113,8 @@ export default () => {
     type: 'Feature'
   }
 
-  console.log(infoSondeo)
 
-  dbRt.ref('PROYECTOS/HSDJH343467/12089904614874/123456789').set(
+
+  dbRt.ref('PROYECTOS/HSDJH343467/12089904614874/'+ randomIdSondeo).set(
   infoSondeo);
 }
