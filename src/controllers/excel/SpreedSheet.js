@@ -2,7 +2,12 @@
 import configSheet from "./configSheet"
 import tableInfo from "./tableInfo";
 
-export default async (sondeo) => {
+export default async (IdSondeo) => {
+
+  // Guardemos el ID del sondeo en el local storage
+  localStorage.setItem('IdSondeoLS', IdSondeo);
+
+  
   document.getElementById('root').innerHTML = ''
   
   // Creamos la tabla encabezado
@@ -14,7 +19,7 @@ export default async (sondeo) => {
   document.getElementById('root').appendChild(divContentTable);
   
   //Hacemos la peticiion a la base de datos
-  var starCountRef = await dbRt.ref('PROYECTOS/HSDJH343467/12089904614874/' + sondeo)
+  var starCountRef = await dbRt.ref('PROYECTOS/HSDJH343467/12089904614874/' + IdSondeo)
   starCountRef.on('value', snapshot => {
     const data = snapshot.val()
 
@@ -30,7 +35,7 @@ export default async (sondeo) => {
             '',
             infoSample['Inicial'],
             infoSample['Final'],
-            '',
+            infoSample['Muestra'],
             '',
             infoSample['Descripcion'],
             '',
@@ -83,7 +88,7 @@ export default async (sondeo) => {
     })
     configSheet(sortData);
   });
-  return(sondeo);
+  return(IdSondeo);
 }
 
 

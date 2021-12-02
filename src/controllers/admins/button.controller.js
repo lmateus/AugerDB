@@ -1,6 +1,11 @@
 const HtmlTableToJson = require('html-table-to-json')
 
 export default () => {
+
+  // Llamamos el ID del sondeo guardado en Local Storage
+  var IdSondeo = localStorage.getItem('IdSondeoLS');
+  
+
   // Buscamos la tabla con la informacion del registro de perforacion
   let table = document.getElementById('divContentTable')
   // Herramienta para convertir tabla a JSON
@@ -59,9 +64,7 @@ export default () => {
         let sampleSup =  parseFloat(MUESTRAS[muestrasArray[j]]['Inicial']);
         let sampleInf =  parseFloat(MUESTRAS[muestrasArray[j]]['Final']);
         strataDepth.push(sampleSup,sampleInf)
-      };
-
-    
+      };    
     };
     estrato['MUESTRAS'] = muestrasEstrato;
     let strataStart = Math.min.apply(null,strataDepth);
@@ -73,12 +76,9 @@ export default () => {
     Layers[randomEstrato]["TRAMO_HASTA(m)"] = {"UNIT":"m","VALUE":strataEnd}
     Layers[randomEstrato]["DESCRIPCIoN "] = "Arcilla limosa de color gris"
     Layers[randomEstrato]["NOMBRE_ESTRATO"] = Math.floor(Math.random() * 1000000000000)
-    Layers[randomEstrato]["USCS"] = colorEstrato
-    
-    
+    Layers[randomEstrato]["USCS"] = colorEstrato    
   };
   // Estraemos la informacion de la tabla encabezado
-
   const idHeadTable = ["logLocation","nameLog","north","date","levelF","east","driller","typeLog"]
   let infoLog = {}
   idHeadTable.forEach(element => {
@@ -115,6 +115,6 @@ export default () => {
 
 
 
-  dbRt.ref('PROYECTOS/HSDJH343467/12089904614874/'+ randomIdSondeo).set(
+  dbRt.ref('PROYECTOS/HSDJH343467/12089904614874/'+ IdSondeo).set(
   infoSondeo);
 }

@@ -1,7 +1,10 @@
 import tableInfo from "../excel/tableInfo";
 
 export default () => {
-    
+
+    let IdSondeo = Math.floor(Math.random() * 1000000000000)    
+    localStorage.setItem('IdSondeoLS', IdSondeo);
+
     document.getElementById('root').innerHTML = ''
     tableInfo();
     
