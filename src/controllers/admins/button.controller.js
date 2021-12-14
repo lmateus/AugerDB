@@ -113,8 +113,8 @@ export default () => {
     type: 'Feature'
   }
 
-
-
+  // Guardamos en la base de datos teniendo en cuenta el sondeo actual
   dbRt.ref('PROYECTOS/HSDJH343467/12089904614874/'+ IdSondeo).set(
   infoSondeo);
+
 }

@@ -1,13 +1,13 @@
 // EXTRAEMOS INFORMACION DE LA BASE DE DATOS DE UN SONDEO CUALQUIERA
 import configSheet from "./configSheet"
 import tableInfo from "./tableInfo";
+import colorMuestras from "./colorMuestras";
 
 export default async (IdSondeo) => {
 
   // Guardemos el ID del sondeo en el local storage
   localStorage.setItem('IdSondeoLS', IdSondeo);
 
-  
   document.getElementById('root').innerHTML = ''
   
   // Creamos la tabla encabezado
@@ -31,8 +31,9 @@ export default async (IdSondeo) => {
         let samplesList = Object.keys(sampleStrata);
         for (let j in samplesList){
           let infoSample = sampleStrata[samplesList[j]]
+          console.log(infoSample['color'])
           sortData.push([
-            '',
+            infoSample['color'],
             infoSample['Inicial'],
             infoSample['Final'],
             infoSample['Muestra'],
@@ -45,7 +46,7 @@ export default async (IdSondeo) => {
           ])
         }
     };
-
+    
     const propLog = data['properties']
     // Agregamos la informacion de las propiedades
     document.getElementById('logLocation').innerText = propLog['direccion']
@@ -87,8 +88,11 @@ export default async (IdSondeo) => {
       return a[1] -b[1]
     })
     configSheet(sortData);
+    colorMuestras(sortData);
   });
   return(IdSondeo);
+  // Coloreamos las celdas de acuerdo al color guardado
+  
 }
 
 

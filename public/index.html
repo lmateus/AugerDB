@@ -8,6 +8,7 @@
     <title>Ingreso de informacion</title>
     <script src="https://kit.fontawesome.com/7fd20a6e02.js" crossorigin="anonymous"></script>
     <!-- Informacion del excel-->
+    
     <script src="https://bossanova.uk/jspreadsheet/v4/jexcel.js"></script>
     <link rel="stylesheet" href="https://bossanova.uk/jspreadsheet/v4/jexcel.css" type="text/css" />
     <script src="https://jsuites.net/v4/jsuites.js"></script>
@@ -15,6 +16,9 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Material+Icons" />
     <!-- BOOTSTRAP CDN-->
     <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <!-- Informacion del mapa-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>	
 
 </head>
 
@@ -45,9 +49,10 @@
             <div id="root" class='root'>               
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-10">
                 <button id="btn-save" type="button" class="btn btn-success" >Guardar</button>
                 <button id="btn-newLog" type="button" class="btn btn-info" >Crear</button>
+                <div id="map" style="width:500; height: 800px;"></div>
             </div>
             
 
@@ -82,6 +87,8 @@
         const dbRt = firebase.database() // Database in real-time
 
     </script>
+
+    <script src="./../src/controllers/map/map.js"></script>
 
 
 </body>
